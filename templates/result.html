@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YOLO Object Detection</title>
+</head>
+<body>
+	<h1>YOLO Object Detection</h1>
+	<p>Model          : {{ model_name }}</p>
+	<p>Person Count   : {{ person_count }}</p>
+	<p>Inference Time : {{ inference_time }} seconds</p>
+	<!--<img src="{{ url_for('uploaded_file', filename=filename) }}" alt="Detection Result"/>-->
+	{% if filename.endswith('.mp4') %}
+    <video width="640" height="480" controls>
+        <source src="{{ url_for('serve_video', filename=filename) }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+{% else %}
+    <img src="{{ url_for('static', filename='uploads/' + filename) }}" alt="Result">
+{% endif %}
+
+	<br>
+	<a href="{{ url_for('index') }}">Back to Home</a>
+</body>
+</html>
